@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "755f3c43-c668-4d6b-9d94-bca6f56c823e": {
+      "ProjectGuid": "755f3c43-c668-4d6b-9d94-bca6f56c823e",
+      "DisplayName": "Net5.Deployment.API",
+      "ColorIndex": 0
+    },
+    "637aa1ea-b929-42d9-9059-57df2c850c87": {
+      "ProjectGuid": "637aa1ea-b929-42d9-9059-57df2c850c87",
+      "DisplayName": "Net5.Deployment.Client",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}

@@ -1,0 +1,30 @@
+﻿@model List<Product>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h4>Products</h4>
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th>ProductId</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Created</th>
+            <th>Updated</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (Product product in Model)
+    {
+        <tr>
+            <td>@product.ProductId</td>
+            <td>@product.Description</td>
+            <td>@product.Price</td>
+            <td>@product.Created</td>
+            <td>@product.Updated</td>
+        </tr>
+    }        
+    </tbody>
+</table>
