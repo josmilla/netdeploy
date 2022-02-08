@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net5.Deployment.API", "Net5.Deployment.API\Net5.Deployment.API.csproj", "{755F3C43-C668-4D6B-9D94-BCA6F56C823E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Net5.Deployment.Client", "Net5.Deployment.Client\Net5.Deployment.Client.csproj", "{637AA1EA-B929-42D9-9059-57DF2C850C87}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{755F3C43-C668-4D6B-9D94-BCA6F56C823E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{755F3C43-C668-4D6B-9D94-BCA6F56C823E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{755F3C43-C668-4D6B-9D94-BCA6F56C823E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{755F3C43-C668-4D6B-9D94-BCA6F56C823E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{637AA1EA-B929-42D9-9059-57DF2C850C87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{637AA1EA-B929-42D9-9059-57DF2C850C87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{637AA1EA-B929-42D9-9059-57DF2C850C87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{637AA1EA-B929-42D9-9059-57DF2C850C87}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {745C00DA-EE73-4526-B3E5-B00347229B0A}
+	EndGlobalSection
+EndGlobal
