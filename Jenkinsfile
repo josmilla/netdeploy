@@ -21,7 +21,7 @@ pipeline {
          }
         stage('Test: Unit Test'){
            steps {
-                sh 'dotnet test XUnitTestProject/XUnitTestProject.csproj --configuration Release --no-restore'
+                sh 'dotnet test Net5.Deployment.TestNUnit/Net5.Deployment.TestNUnit.csproj --configuration Release --no-restore'
              }
           }
         stage('Publish'){
@@ -31,7 +31,7 @@ pipeline {
         }
         stage('Deploy'){
              steps{
-               sh '''for pid in $(lsof -t -i:9090); do
+               sh '''for pid in $(lsof -t -i:9095); do
                        kill -9 $pid
                done'''
                sh 'cd Net5.Deployment.API/bin/Release/net5.0/publish/'
