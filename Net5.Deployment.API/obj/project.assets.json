@@ -5986,11 +5986,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Documentos\\jose\\bcp\\Cursos NET\\descargas\\Net5-Desarrollo-202112\\netdeploy\\Net5.Deployment.API\\Net5.Deployment.API.csproj",
+      "projectUniqueName": "C:\\Documentos\\jose\\bcp\\Cursos NET\\descargas\\Net5-Desarrollo-202112\\Net5-Desarrollo-202112\\15\\Net5.Deployment\\Net5.Deployment.API\\Net5.Deployment.API.csproj",
       "projectName": "Net5.Deployment.API",
-      "projectPath": "C:\\Documentos\\jose\\bcp\\Cursos NET\\descargas\\Net5-Desarrollo-202112\\netdeploy\\Net5.Deployment.API\\Net5.Deployment.API.csproj",
+      "projectPath": "C:\\Documentos\\jose\\bcp\\Cursos NET\\descargas\\Net5-Desarrollo-202112\\Net5-Desarrollo-202112\\15\\Net5.Deployment\\Net5.Deployment.API\\Net5.Deployment.API.csproj",
       "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-      "outputPath": "C:\\Documentos\\jose\\bcp\\Cursos NET\\descargas\\Net5-Desarrollo-202112\\netdeploy\\Net5.Deployment.API\\obj\\",
+      "outputPath": "C:\\Documentos\\jose\\bcp\\Cursos NET\\descargas\\Net5-Desarrollo-202112\\Net5-Desarrollo-202112\\15\\Net5.Deployment\\Net5.Deployment.API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "f2+FIcp5FPNHpgatj0pRI0W98ebme8gT25OQRTW3iEN22G2TYVDuR+VJ0qZRS4MIoqYSqPa5ulQLcSwfC6XwGw==",
+  "dgSpecHash": "LqAUgubVuQUnoiMKvPBMdB2ksjw+zeTctK0I6bofnmEitgTVVLL340Anno+rVVo1ZicelhWCthIwNvPhlj03/g==",
   "success": true,
-  "projectFilePath": "C:\\Documentos\\jose\\bcp\\Cursos NET\\descargas\\Net5-Desarrollo-202112\\netdeploy\\Net5.Deployment.API\\Net5.Deployment.API.csproj",
+  "projectFilePath": "C:\\Documentos\\jose\\bcp\\Cursos NET\\descargas\\Net5-Desarrollo-202112\\Net5-Desarrollo-202112\\15\\Net5.Deployment\\Net5.Deployment.API\\Net5.Deployment.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Usuario\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

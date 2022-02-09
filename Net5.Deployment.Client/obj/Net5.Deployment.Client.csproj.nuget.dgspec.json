@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Documentos\\jose\\bcp\\Cursos NET\\descargas\\Net5-Desarrollo-202112\\netdeploy\\Net5.Deployment.Client\\Net5.Deployment.Client.csproj": {}
+    "C:\\Documentos\\jose\\bcp\\Cursos NET\\descargas\\Net5-Desarrollo-202112\\Net5-Desarrollo-202112\\15\\Net5.Deployment\\Net5.Deployment.Client\\Net5.Deployment.Client.csproj": {}
   },
   "projects": {
-    "C:\\Documentos\\jose\\bcp\\Cursos NET\\descargas\\Net5-Desarrollo-202112\\netdeploy\\Net5.Deployment.Client\\Net5.Deployment.Client.csproj": {
+    "C:\\Documentos\\jose\\bcp\\Cursos NET\\descargas\\Net5-Desarrollo-202112\\Net5-Desarrollo-202112\\15\\Net5.Deployment\\Net5.Deployment.Client\\Net5.Deployment.Client.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Documentos\\jose\\bcp\\Cursos NET\\descargas\\Net5-Desarrollo-202112\\netdeploy\\Net5.Deployment.Client\\Net5.Deployment.Client.csproj",
+        "projectUniqueName": "C:\\Documentos\\jose\\bcp\\Cursos NET\\descargas\\Net5-Desarrollo-202112\\Net5-Desarrollo-202112\\15\\Net5.Deployment\\Net5.Deployment.Client\\Net5.Deployment.Client.csproj",
         "projectName": "Net5.Deployment.Client",
-        "projectPath": "C:\\Documentos\\jose\\bcp\\Cursos NET\\descargas\\Net5-Desarrollo-202112\\netdeploy\\Net5.Deployment.Client\\Net5.Deployment.Client.csproj",
+        "projectPath": "C:\\Documentos\\jose\\bcp\\Cursos NET\\descargas\\Net5-Desarrollo-202112\\Net5-Desarrollo-202112\\15\\Net5.Deployment\\Net5.Deployment.Client\\Net5.Deployment.Client.csproj",
         "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Documentos\\jose\\bcp\\Cursos NET\\descargas\\Net5-Desarrollo-202112\\netdeploy\\Net5.Deployment.Client\\obj\\",
+        "outputPath": "C:\\Documentos\\jose\\bcp\\Cursos NET\\descargas\\Net5-Desarrollo-202112\\Net5-Desarrollo-202112\\15\\Net5.Deployment\\Net5.Deployment.Client\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
