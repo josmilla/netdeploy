@@ -1,144 +1,91 @@
-@Library('jenkins-sharedlib@feature/modularization-net-core')
+pipeline {
 
-import sharedlib.NetCoreJenkinsUtil
+     // 全局环境变量
+    environment {
+        // 编译阶段的变量
+        PROJDIR    =   'JenkinsDemo/src/WebDemo'                         //  
+        PROJNAME   =   'JenkinsDemo/src/WebDemo/WebDemo.csproj'          // 要发布的主项目的 .csproj 文件路径
 
-def utils = new NetCoreJenkinsUtil(this)
+        // IIS 配置，远程发布的变量
+        IISTMP     =   'C:/webdemo_tmp'                            // 用于打包发布的临时目录
+        IISAPP     =   'jenkinsdemo.com'                           // 网站名称
+        IISADDR    =   'https://192.168.0.66:8172/msdeploy.axd'    // WebDeploy 的地址
+        IISUSER    =   'jenkinesdemo'                                    // 用于登录到 IIS 的账号密码
+        IISADMIN   =   'jenkinesdemo'                
+    }
 
-/* Project settings */
+    
+   
+    agent {
+        node {
+            label 'windows'
+    }
+  }
 
-def project="G760"
+    // 开始构建流水线
+    stages {
+        // 还原包
+        stage('Build') { 
+            steps {
+                sh 'env'
+                sh 'dotnet restore'
+            }
+        }
 
-/* Mail configuration*/
+        // 执行单元测试
+        stage('Test') { 
+            steps {
+                sh 'dotnet test  --logger "console;verbosity=detailed"  --blame  --logger trx'
+            }
+        }
 
-// If recipients is null the mail is sent to the person who start the job
+        // 正式发布
+        stage('Publish') { 
+            steps {
+                sh 'dotnet publish "${PROJNAME}" -c Release'
+            }
+        }
 
-// The mails should be separated by commas(',')
+    // 打包部署
+    stage('Deploy') {
+      steps {
 
-def recipients=""
+          script {
+            powershell """
+            rm -r ${IISTMP}
+            """
+          }
 
-def deploymentEnvironment="dev"
+           script {
+            powershell """
+            mkdir ${IISTMP}
+            mkdir ${IISTMP}/deploy
+            """
+          }
 
-try {
+          script {
+            powershell """
+            cp "${WORKSPACE}/${PROJDIR}/bin/Release/netcoreapp3.1/publish/*" ${IISTMP}/deploy/ -r
+            """
+          }
 
-   node {
+        // 打包网站
+          script {
+            powershell """
+                msdeploy.exe -verb:sync -source:iisApp="${IISTMP}/deploy" -dest:package="${IISTMP}/web.zip"
+            """
+          }
 
-      stage('Preparation') {
-
-        cleanWs()
-
-        utils.notifyByMail('START',recipients)
-
-        checkout scm
-
-        utils.prepare()
-
-        //Setup parameters
-
-        env.project="${project}"
-
-        env.deploymentEnvironment = "${deploymentEnvironment}"
-
-        utils.setNetCoreVersion("NETCORE_50")
-
-        //Línea de código para habilitar la opción de obtener credenciales desde Hashicorp Vault      
-
-        utils.setHashicorpVaultEnabled(false)
-
-        //Línea de código para establecer el valor del ambiente de Hashicorp Vault
-
-        utils.setHashicorpVaultEnvironment("dev")
-
-        utils.setSonarQualityGateValidationEnabled(false)
-
- 
-
+        // 远程部署文档
+        // https://blog.richardszalay.com/2012/12/17/demystifying-msdeploy-skip-rules/
+         script {
+            powershell """
+               msdeploy.exe -verb:sync -source:package="${IISTMP}/web.zip" -dest:iisApp=${IISAPP},wmsvc=${IISADDR},username=${IISUSER},password=${IISADMIN},skipAppCreation=false -allowUntrusted=true -skip:objectName="filePath",absolutePath="vue\$",skipAction=Delete
+            """
+          }
       }
+     }
 
-      stage('Build & U.Test') {
-
-        utils.build("/p:PublishProfile=WebDeploy")
-
-      }
-
-      /*stage('QA Analisys') {
-
-        utils.executeQA()
-
-      }
-
-               stage('SAST Analisys') {
-
-        utils.executeSast()
-
-      }*/
-
-    /*  stage('Upload Artifact') {
-
-        utils.uploadArtifact()
-
-      }*/
-
-      stage('Save Results') {
-
-        utils.saveResult('zip')
-
-      }
-
- 
-
-
- 
-
-      stage ('Delivery to DEV'){
-
-       
-
-           def parameters = [
-
-             webAppParameters : [
-
-               resourceGroupName : "rsgreu2g760d01",
-
-               webAppName: "wappeu2g760d01",    
-
-             ],           
-
-             appSettings : [
-
-               KeyVaultName : "akvteu2g760c01"
-
-             ]
-
-           ]
-
-           utils.deployWebApp(parameters)
-
-         }
-
-     
-
-      stage('Post Execution') {
-
-        utils.executePostExecutionTasks()
-
-        utils.notifyByMail('SUCCESS',recipients)
-
-      }
-
-   }
-
-}
-
-catch(Exception e) {
-
-   node{
-
-      utils.executeOnErrorExecutionTasks()
-
-      utils.notifyByMail('FAIL',recipients)
-
-    throw e
-
-   }
+    }
 
 }
