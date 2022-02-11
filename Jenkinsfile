@@ -1,42 +1,144 @@
-pipeline {
-    agent any
-    triggers {
-        githubPush()
-    }
-    stages {
-        stage('Restore packages'){
-           steps{
-               sh 'dotnet restore Net5.Deployment.sln'
-            }
+@Library('jenkins-sharedlib@feature/modularization-net-core')
+
+import sharedlib.NetCoreJenkinsUtil
+
+def utils = new NetCoreJenkinsUtil(this)
+
+/* Project settings */
+
+def project="G760"
+
+/* Mail configuration*/
+
+// If recipients is null the mail is sent to the person who start the job
+
+// The mails should be separated by commas(',')
+
+def recipients=""
+
+def deploymentEnvironment="dev"
+
+try {
+
+   node {
+
+      stage('Preparation') {
+
+        cleanWs()
+
+        utils.notifyByMail('START',recipients)
+
+        checkout scm
+
+        utils.prepare()
+
+        //Setup parameters
+
+        env.project="${project}"
+
+        env.deploymentEnvironment = "${deploymentEnvironment}"
+
+        utils.setNetCoreVersion("NETCORE_50")
+
+        //Línea de código para habilitar la opción de obtener credenciales desde Hashicorp Vault      
+
+        utils.setHashicorpVaultEnabled(false)
+
+        //Línea de código para establecer el valor del ambiente de Hashicorp Vault
+
+        utils.setHashicorpVaultEnvironment("dev")
+
+        utils.setSonarQualityGateValidationEnabled(false)
+
+ 
+
+      }
+
+      stage('Build & U.Test') {
+
+        utils.build("/p:PublishProfile=WebDeploy")
+
+      }
+
+      /*stage('QA Analisys') {
+
+        utils.executeQA()
+
+      }
+
+               stage('SAST Analisys') {
+
+        utils.executeSast()
+
+      }*/
+
+    /*  stage('Upload Artifact') {
+
+        utils.uploadArtifact()
+
+      }*/
+
+      stage('Save Results') {
+
+        utils.saveResult('zip')
+
+      }
+
+ 
+
+
+ 
+
+      stage ('Delivery to DEV'){
+
+       
+
+           def parameters = [
+
+             webAppParameters : [
+
+               resourceGroupName : "rsgreu2g760d01",
+
+               webAppName: "wappeu2g760d01",    
+
+             ],           
+
+             appSettings : [
+
+               KeyVaultName : "akvteu2g760c01"
+
+             ]
+
+           ]
+
+           utils.deployWebApp(parameters)
+
          }
-        stage('Clean'){
-           steps{
-               sh 'dotnet clean Net5.Deployment.sln --configuration Release'
-            }
-         }
-        stage('Build'){
-           steps{
-               sh 'dotnet build Net5.Deployment.sln --configuration Release --no-restore'
-            }
-         }
-        stage('Test: Unit Test'){
-           steps {
-                sh 'dotnet test Net5.Deployment.TestNUnit/Net5.Deployment.TestNUnit.csproj --configuration Release --no-restore'
-             }
-          }
-        stage('Publish'){
-             steps{
-               sh 'dotnet publish Net5.Deployment.API/Net5.Deployment.API.csproj --configuration Release --no-restore'
-             }
-        }
-        stage('Deploy'){
-             steps{
-               sh '''for pid in $(lsof -t -i:9095); do
-                       kill -9 $pid
-               done'''
-               sh 'cd Net5.Deployment.API/bin/Release/net5.0/publish/'
-               sh 'nohup dotnet Net5.Deployment.API.dll --urls="http://172.24.0.1:9095" --ip="1172.24.0.1" --port=9095 --no-restore > /dev/null 2>&1 &'
-             }
-        }
-    }
+
+     
+
+      stage('Post Execution') {
+
+        utils.executePostExecutionTasks()
+
+        utils.notifyByMail('SUCCESS',recipients)
+
+      }
+
+   }
+
+}
+
+catch(Exception e) {
+
+   node{
+
+      utils.executeOnErrorExecutionTasks()
+
+      utils.notifyByMail('FAIL',recipients)
+
+    throw e
+
+   }
+
 }
